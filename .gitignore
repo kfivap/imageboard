@@ -1,0 +1,11 @@
+/server/node_modules/
+
+/.idea/
+/client/node_modules/
+
+
+/server/static/*
+
+
+
+/client/build/
