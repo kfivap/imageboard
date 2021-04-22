@@ -1,21 +1,45 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Card from "react-bootstrap/Card";
 import {parseDate} from "../functions/parseDate";
 import ImageComponent from "./ImageComponent";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const ThreadPosts = ({post, index}) => {
+
+const ThreadPosts = observer(({post, index}) => {
     // console.log(JSON.parse(post.media))
     // console.log(process.env.REACT_APP_API_URL)
+    const {board} =useContext(Context)
+ const CreatePostHandler = (id) =>{
+
+        board.setShowCreatePost(true)
+     if(board.createPostText === ''){
+         console.log(1)
+         board.setCreatePostText(board.createPostText + '>>'+id + '\n')
+
+     }  else {
+         console.log(3)
+         board.setCreatePostText(board.createPostText + '\n>>'+id)
+
+     }
+
+
+
+ }
+
     return (
         <div>
             <Card.Header>{post.author} / {parseDate(post.createdAt)}
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                №{post.id}
+               <span className={"appLink"}
+               onClick={()=>CreatePostHandler(post.id)}
+               >№{post.id}</span>
                 &nbsp;
                 &nbsp;
-                #{index}
+                &nbsp;
+                <span className={'postIndex'}>#{index}</span>
             </Card.Header>
             <Card.Body>{post.text}</Card.Body>
             <span>
@@ -38,6 +62,6 @@ const ThreadPosts = ({post, index}) => {
 
         </div>
     );
-};
+})
 
 export default ThreadPosts;

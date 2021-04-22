@@ -1,17 +1,19 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import UploadImagesPreview from "./UploadImagesPreview";
 import {observer} from "mobx-react-lite";
 
 import {createPost} from "../http/PostAPI";
+import {Context} from "../index";
 
-const CreatePost = observer(() => {
-    const [show, setShow] = useState(false)
-    const [update, setUpate] = useState(false)
-
+const CreatePost = observer(({showBoolean}) => {
+    const [show, setShow] = useState(showBoolean || false)
+    const [update, setUpdate] = useState(false)
+    const {board} =useContext(Context)
     const toggleHandler = () => {
         setShow(prevState => !prevState)
+        board.setShowCreatePost(false)
     }
 
     const [options, setOptions] = useState('')
@@ -22,7 +24,7 @@ const CreatePost = observer(() => {
         if (event.target.files.length + fileArray.length < 5) {
             fileArray.push(...event.target.files)
             setFileArray(fileArray)
-            setUpate(prevState => !prevState)
+            setUpdate(prevState => !prevState)
         }
 
     }
@@ -31,7 +33,7 @@ const CreatePost = observer(() => {
 
         formData.append('threadId', window.location.pathname.split('/')[3])
         formData.append('options', options)
-        formData.append('text', text)
+        formData.append('text', board.createPostText)
 
 
         formData.append('media0', fileArray[0])
@@ -39,8 +41,10 @@ const CreatePost = observer(() => {
         formData.append('media2', fileArray[2])
         formData.append('media3', fileArray[3])
 
-
-        createPost(formData).then(() => {// window.location.reload()
+        createPost(formData).then(() => {
+            board.setShowCreatePost(false)
+            board.fetchPostList(window.location.pathname.split('/')[3])
+            board.setCreatePostText('')
         })
     }
 
@@ -62,10 +66,10 @@ const CreatePost = observer(() => {
 
                         <Form.Group controlId="formText">
                             <Form.Control
-                                as="textarea" rows={3}
+                                as="textarea" rows={12}
                                 placeholder="text"
-                                value={text}
-                                onChange={(e) => setText(e.target.value)}
+                                value={board.createPostText}
+                                onChange={(e) => board.setCreatePostText(e.target.value)}
                             />
                         </Form.Group>
 
@@ -95,7 +99,7 @@ const CreatePost = observer(() => {
                             <button className={'buttonNone removeUploadBtn'}
                                     onClick={() => {
                                         fileArray.splice(index, 1)
-                                        setUpate(prevState => !prevState)
+                                        setUpdate(prevState => !prevState)
                                     }}
                             >X</button>
                         <UploadImagesPreview file={file}/>

@@ -8,6 +8,7 @@ import {check} from "./http/userAPI";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import ImageExpanded from "./components/ImageExpanded";
+import ModalCreatePost from "./components/ModalCreatePost";
 
 
 const App = observer(() => {
@@ -39,6 +40,8 @@ const App = observer(() => {
             <Container style={{maxWidth: 760}}>
                 <AppRouter/></Container>
             <ImageExpanded/>
+            <ModalCreatePost/>
+
         </BrowserRouter>
     );
 })

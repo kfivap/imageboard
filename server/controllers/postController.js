@@ -69,8 +69,14 @@ class postController {
         let posts = await Post.findAndCountAll({where:{
                 threadId
             }})
+        if(!posts.count){
+            return res.status(404).json({message: "thread not found"})
+        }
         return res.json({posts})
     }
+
+
+
     async Update(req, res, next){
         return res.json({message: 'Route works but do nothing'})
     }
