@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import UploadImagesPreview from "./UploadImagesPreview";
 import {observer} from "mobx-react-lite";
-import {setBio} from "../http/userAPI";
-import {createThreadAPI} from "../http/ThreadAPI";
+
 import {createPost} from "../http/PostAPI";
 
 const CreatePost = observer(() => {
@@ -87,7 +86,7 @@ const CreatePost = observer(() => {
                         >Create</Button>
 
 
-                        <img id={'output'}/>
+
 
 
                     </Form>

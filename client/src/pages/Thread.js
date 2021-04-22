@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
-
-import {getBoards} from "../http/boardsAPI";
 import {getPosts} from "../http/PostAPI";
 import ThreadPosts from "../components/ThreadPosts";
 import CreatePost from "../components/CreatePost";

@@ -17,7 +17,7 @@ const BoardsList = observer(() => {
         fetchData()
 
     }, [])
-    console.log(boards)
+    // console.log(boards)
     return (
         <div>
             Board List

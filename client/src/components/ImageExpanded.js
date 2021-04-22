@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
 const scaleChange = 12
@@ -16,7 +16,7 @@ const ImageExpanded = observer(() => {
             return
         }
         if (e.deltaY < 0) {
-            if(size+scaleChange>125){
+            if(size+scaleChange>180){
                 return;
             }
             setSize(prevState => prevState + scaleChange)
@@ -43,7 +43,7 @@ const ImageExpanded = observer(() => {
     return (
         <img src={board.expandedMedia}
              className={'threadImageFull'}
-             style={{maxWidth: size + 'vw', maxHeight: size + 'vh'}}
+             style={{width: size + 'vw'}}
              onMouseOver={()=>{disableScrolling()}}
              onMouseLeave={()=>{enableScrolling()}}
              onClick={() => {

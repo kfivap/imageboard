@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import UploadImagesPreview from "./UploadImagesPreview";
 import {observer} from "mobx-react-lite";
-import {setBio} from "../http/userAPI";
+
 import {createThreadAPI} from "../http/ThreadAPI";
 
 const CreateThread = observer(() => {
@@ -33,13 +33,10 @@ const CreateThread = observer(() => {
         formData.append('options', options)
         formData.append('text', text)
 
-        fileArray.map((file, index)=>{
+        fileArray.forEach((file, index)=>{
             formData.append('media'+index, file)
         })
-        // formData.append('media0', fileArray[0])
-        // formData.append('media1', fileArray[1])
-        // formData.append('media2', fileArray[2])
-        // formData.append('media3', fileArray[3])
+
 
 
 
@@ -78,7 +75,6 @@ const CreateThread = observer(() => {
                                 id="exampleFormControlFile1"
                                 label="Example file input"
                                 accept=".jpg,.png"
-                                // onChange={selectFiles}
                                 onChange={loadFile}
                             />
                         </Form.Group>
@@ -89,7 +85,6 @@ const CreateThread = observer(() => {
                         >Create</Button>
 
 
-                        <img id={'output'}/>
 
 
                     </Form>

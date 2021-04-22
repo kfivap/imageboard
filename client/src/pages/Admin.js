@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {createThreadAPI} from "../http/ThreadAPI";
+import React, {useContext, useState} from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import {createBoardAPI} from "../http/boardsAPI";
+import {Context} from "../index";
 
 const Admin = () => {
 
@@ -11,17 +11,26 @@ const Admin = () => {
     const [shortName, setShortName] = useState('')
     const [description, setDescription] = useState('')
 
-    const createBoard = () => {
+    const {user} = useContext(Context)
+    console.log(user.userRole)
+
+    const createBoard = async () => {
         const formData = new FormData()
 
         formData.append('name', name)
         formData.append('shortName', shortName)
         formData.append('description', description)
+        try {
+          await  createBoardAPI(formData)
+            window.location.reload()
+        } catch (e) {
+            console.log(e)
+        }
 
-        createBoardAPI(formData).then(() => { window.location.reload()
-        })
+
     }
 
+if(user.userRole ==='ADMIN'){
     return (
         <div>
             <Form>
@@ -57,13 +66,16 @@ const Admin = () => {
                     onClick={createBoard}
                 >Create</Button>
 
-
-
-
-
             </Form>
         </div>
-    );
+    )} else {
+    return (
+        <div>Forbidden / Unathorized
+            <br/>
+        Please log in or leave this page
+        </div>
+    )
+}
 };
 
 export default Admin;

@@ -4,7 +4,9 @@ const UploadImagesPreview = (props) => {
 
     return (
 
-<img className={'uploadImage'} src={ URL.createObjectURL(props.file)} />
+<img className={'uploadImage'} src={ URL.createObjectURL(props.file)}
+alt={'upload'}
+/>
 
     );
 };

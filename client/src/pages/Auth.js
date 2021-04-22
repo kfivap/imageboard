@@ -24,12 +24,13 @@ const Auth = observer(() => {
                 data = await registration(email, password, nick)
                 console.log(data)
             }
-            user.setUser(user)
+
             user.setIsAuth(true)
             history.push('/')
             window.location.reload();
         } catch (e) {
-            alert(e.response.data.message)
+            // alert(e.response.data.message)
+            alert(e)
         }
     }
 

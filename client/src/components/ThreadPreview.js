@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {parseDate} from "../functions/parseDate";
 import {useHistory} from "react-router-dom";
-import {getThread} from "../http/ThreadAPI";
 import {getPreview} from "../http/PostAPI";
-import Card from "react-bootstrap/Card";
 import ImageComponent from "./ImageComponent";
 
 const ThreadPreview = ({threadInfo}) => {

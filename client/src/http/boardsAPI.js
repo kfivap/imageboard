@@ -8,6 +8,14 @@ export const getBoards = async () =>{
     return data
 }
 
+export const getBoardInfo = async (board) =>{
+
+    const {data} = await $host.get
+    (`api/board/getInfo?board=${board}`)
+
+    return data
+}
+
 
 export const createBoardAPI = async (formData) =>{
 

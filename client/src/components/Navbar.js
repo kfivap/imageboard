@@ -16,7 +16,7 @@ const NavBar = observer(() => {
     const history = useHistory()
 
     const logOut = () =>{
-        user.setUser({})
+        // user.setUser({})
         user.setIsAuth(false)
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
