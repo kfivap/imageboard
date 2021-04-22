@@ -7,6 +7,7 @@ import {Context} from "./index";
 import {check} from "./http/userAPI";
 import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
+import ImageExpanded from "./components/ImageExpanded";
 
 
 const App = observer(() => {
@@ -35,6 +36,7 @@ const App = observer(() => {
             <NavBar/>
             <Container style={{maxWidth: 760}}>
                 <AppRouter/></Container>
+            <ImageExpanded/>
         </BrowserRouter>
     );
 })

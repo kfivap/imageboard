@@ -77,6 +77,9 @@ class threadController {
             }
 
             let boardFind = await Board.findOne({where: {shortName: board}})
+            if(!boardFind){
+                return res.status(404).json({message: 'board not found'})
+            }
 
             let threads = await Thread.findAndCountAll({where:{
                   boardId: boardFind.id

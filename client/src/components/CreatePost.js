@@ -41,7 +41,7 @@ const CreatePost = observer(() => {
         formData.append('media3', fileArray[3])
 
 
-        createPost(formData).then(() => { window.location.reload()
+        createPost(formData).then(() => {// window.location.reload()
         })
     }
 

@@ -27,7 +27,7 @@ const ThreadPreview = ({threadInfo}) => {
 
     }, [])
     // console.log(process.env.REACT_APP_API_URL + JSON.parse(media))
-console.log(media)
+// console.log(media)
     const history = useHistory()
     return (
         <div>

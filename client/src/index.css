@@ -1,3 +1,6 @@
+body{
+
+}
 
 .appLink{
   cursor: pointer;
@@ -32,18 +35,31 @@
 .uploadSpan{
 position: relative;
 }
+/*.threadImageFull{*/
+/*  position: absolute;*/
+/*  margin: auto;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  top: auto;*/
+/*  bottom: 0;*/
+/*max-width: 80vw;*/
+/*  max-height: 80vh;*/
+/*}*/
 .threadImageFull{
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-max-width: 80vw;
-  max-height: 80vh;
+  background-color: #eee;
+  position: fixed;
+  /*width: 40%;*/
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  padding: 10px;
+  transform: translate(-50%, -50%);
+
+
 }
 .threadImagePreview{
   /*position: absolute;*/
 max-width: 150px;
   max-height: 150px;
 }
+

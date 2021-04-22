@@ -24,6 +24,10 @@ export const publicRoutes = [
         Component: Admin
     },
     {
+        path: NOTFOUND_ROUTE,
+        Component: NotFoundPage
+    },
+    {
         path: MAIN_ROUTE,
         Component: Main
     },
@@ -36,13 +40,14 @@ export const publicRoutes = [
         Component: Auth
     },
     {
-        path: BOARD_ROUTE ,
+        path:  BOARD_ROUTE +"/",
         Component: Board
     },
     {
         path: THREAD_ROUTE,
         Component: Thread
     },
+
 
     // {
     //     path: USER_ROUTE + '/:id',
