@@ -1,12 +1,13 @@
 import React from 'react';
 import Card from "react-bootstrap/Card";
 import {parseDate} from "../functions/parseDate";
+import ImageComponent from "./ImageComponent";
 
 const ThreadPosts = ({post, index}) => {
-    console.log(JSON.parse(post.media))
-    console.log(process.env.REACT_APP_API_URL)
+    // console.log(JSON.parse(post.media))
+    // console.log(process.env.REACT_APP_API_URL)
     return (
-        <Card>
+        <div>
             <Card.Header>{post.author} / {parseDate(post.createdAt)}
                 &nbsp;
                 &nbsp;
@@ -23,13 +24,9 @@ const ThreadPosts = ({post, index}) => {
                                  return null
                              }
                                  return(
-                                 <img src={process.env.REACT_APP_API_URL + img}
-                                      style={{
-                                          maxWidth: 150,
-                                          maxHeight: 150,
-                                          display: "inline"
-                                      }}
-                                 />)
+                                     <ImageComponent  key={index} src={process.env.REACT_APP_API_URL + img}/>
+
+                                 )
                              }
 
                              )
@@ -39,7 +36,7 @@ const ThreadPosts = ({post, index}) => {
                          }
             </span>
 
-        </Card>
+        </div>
     );
 };
 

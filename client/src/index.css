@@ -32,3 +32,18 @@
 .uploadSpan{
 position: relative;
 }
+.threadImageFull{
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+max-width: 80vw;
+  max-height: 80vh;
+}
+.threadImagePreview{
+  /*position: absolute;*/
+max-width: 150px;
+  max-height: 150px;
+}

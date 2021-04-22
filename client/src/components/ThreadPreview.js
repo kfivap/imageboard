@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import {getThread} from "../http/ThreadAPI";
 import {getPreview} from "../http/PostAPI";
 import Card from "react-bootstrap/Card";
+import ImageComponent from "./ImageComponent";
 
 const ThreadPreview = ({threadInfo}) => {
 
@@ -39,13 +40,7 @@ console.log(media)
     </span>
 
             {media ? media.map((img, index) =>
-                    <img src={process.env.REACT_APP_API_URL + img}
-                         style={{
-                             maxWidth: 150,
-                             maxHeight: 150,
-                             display: "inline"
-                         }}
-                    />
+                    <ImageComponent key={index} src={process.env.REACT_APP_API_URL + img}/>
                 )
 
                 :

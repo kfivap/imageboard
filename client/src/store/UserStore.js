@@ -5,9 +5,7 @@ export default class UserStore {
 
     constructor() {
         this._isAuth = false
-        this._user = {}
-        this._userId = null
-        this._userBio = {}
+
         makeAutoObservable(this)
     }
 
@@ -20,9 +18,7 @@ export default class UserStore {
     setUserId(id){
         this._userId = id
     }
-    setUserBio(bio){
-        this._userBio = bio
-    }
+
 
     get isAuth(){
         return this._isAuth
@@ -35,7 +31,5 @@ export default class UserStore {
     get userId(){
         return this._userId
     }
-    get userBio(){
-        return this._userBio
-    }
+
 }
