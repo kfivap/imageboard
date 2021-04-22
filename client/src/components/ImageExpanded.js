@@ -33,7 +33,7 @@ const ImageExpanded = observer(() => {
         window.onscroll=function(){};
     }
 
-    disableScrolling()
+
 
     if(board.expandedMedia===''){
         enableScrolling()
@@ -44,8 +44,9 @@ const ImageExpanded = observer(() => {
         <img src={board.expandedMedia}
              className={'threadImageFull'}
              style={{maxWidth: size + 'vw', maxHeight: size + 'vh'}}
+             onMouseOver={()=>{disableScrolling()}}
+             onMouseLeave={()=>{enableScrolling()}}
              onClick={() => {
-// console.log(window.scrollY)
                  board.setExpandedMedia('')
              }}
              onWheel={(e) => onWheelHandler(e)}
