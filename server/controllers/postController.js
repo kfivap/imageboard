@@ -92,10 +92,21 @@ class postController {
         let count = await Post.count({
             where:{threadId}
         })
-        console.log(count)
+        // console.log(count)
+
+        let minus = 2
+
+        if(count<minus){
+            minus=count-1
+        }
+        if(count===minus){
+            minus=1
+        }
+
+        console.log(count, minus)
         let posts = await Post.findAndCountAll({where:{
                 threadId
-            }, offset: count-2})
+            }, offset: count-minus})
         let opPost = await Post.findOne({where:{threadId}})
 
         return res.json({posts, opPost})

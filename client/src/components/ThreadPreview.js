@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {parseDate} from "../functions/parseDate";
 import {useHistory} from "react-router-dom";
 import {getPreview} from "../http/PostAPI";
 import ImageComponent from "./ImageComponent";
 import ThreadPosts from "./ThreadPosts";
 import index from "jwt-decode";
+import {Context} from "../index";
 
 const ThreadPreview = ({threadInfo}) => {
 
@@ -20,9 +21,9 @@ const ThreadPreview = ({threadInfo}) => {
 
             setPosts(data.posts)
             setOpPost(data.opPost)
-            // console.log(data.opPost)
-            if(data?.opPost?.media){
-               setMedia(JSON.parse(data?.opPost?.media))
+
+            if (data?.opPost?.media) {
+                setMedia(JSON.parse(data?.opPost?.media))
             }
             // setMedia(JSON.parse(data?.posts?.media))
             // console.log(data)
@@ -33,31 +34,56 @@ const ThreadPreview = ({threadInfo}) => {
 
 
     }, [])
-    // console.log(process.env.REACT_APP_API_URL + JSON.parse(media))
-// console.log(media)
+
     const history = useHistory()
-    // console.log(threadInfo)
+
+    const {board} = useContext(Context)
+    const CreatePostHandler = (id) => {
+        // console.log(opPost.threadId)
+        board.setCreatePostThreadId(opPost.threadId)
+        board.setShowCreatePost(true)
+        if (board.createPostText === '') {
+            // console.log(1)
+            board.setCreatePostText(board.createPostText + '>>' + id + '\n')
+
+        } else {
+            // console.log(3)
+            board.setCreatePostText(board.createPostText + '\n>>' + id)
+
+        }
+    }
+    // console.log(posts)
     return (
-        <div>
-            <br/>
+        <div className={'threadPreview'}>
+            <div className={'opPost'}>
+                {opPost?.author} &nbsp;
+                {parseDate(threadInfo.createdAt)}
+                &nbsp;
 
-            {parseDate(threadInfo.createdAt)}
-            <span onClick={() => history.push(window.location.pathname + '/res/' + threadInfo.id)}> To thread
-    <div>{opPost?.text}</div>
+                <span className={"appLink"}
+                            onClick={() => CreatePostHandler(opPost?.id)}
+            >№{opPost?.id}</span>
+                &nbsp;
+                <span className={'postIndex'}>#0(OP)</span>
 
-    </span>
+                <span onClick={() => history.push(window.location.pathname + '/res/' + threadInfo.id)}> To thread</span>
 
-            {media ? media.map((img, index) =>
-                    <ImageComponent key={index} src={process.env.REACT_APP_API_URL + img}/>
-                )
+                <div className={'opText'}>{opPost?.text}</div>
 
-                :
-                null
-            }
 
-            {posts?.rows?.map((post, index)=>
-                <ThreadPosts post={post} key={index}/>
-            )
+                {media ? media.map((img, index) =>
+                        <ImageComponent key={index} src={process.env.REACT_APP_API_URL + img}/>
+                    )
+
+                    :
+                    null
+                }
+            </div>
+            {posts?.rows?.map((post, index) =>{
+
+                return(
+                <ThreadPosts post={post} key={index} index={posts.count-2+index}/>)
+            })
             }
 
 

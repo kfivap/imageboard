@@ -81,3 +81,17 @@ max-width: 150px;
   padding: 10px;
   transform: translate(-50%, -50%);
 }
+.threadPreview{
+  border: #000e26 solid 1px;
+  margin: 10px 0 10px 0;
+  padding: 5px;
+}
+.opText{
+  padding: 10px;
+}
+.opPost{
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  background-color: #dbdbdb;
+}
