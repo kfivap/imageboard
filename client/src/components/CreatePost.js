@@ -3,14 +3,15 @@ import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import UploadImagesPreview from "./UploadImagesPreview";
 import {observer} from "mobx-react-lite";
-
+import {useHistory} from 'react-router-dom'
 import {createPost} from "../http/PostAPI";
 import {Context} from "../index";
 
 const CreatePost = observer(({showBoolean}) => {
     const [show, setShow] = useState(showBoolean || false)
     const [update, setUpdate] = useState(false)
-    const {board} =useContext(Context)
+    const {board} = useContext(Context)
+    const history = useHistory()
     const toggleHandler = () => {
         setShow(prevState => !prevState)
         board.setShowCreatePost(false)
@@ -28,10 +29,10 @@ const CreatePost = observer(({showBoolean}) => {
         }
 
     }
-    const createThread = () => {
+    const createThreadPost = () => {
         const formData = new FormData()
 
-        formData.append('threadId', window.location.pathname.split('/')[3])
+        formData.append('threadId', window.location.pathname.split('/')[3] || board.createPostThreadId)
         formData.append('options', options)
         formData.append('text', board.createPostText)
 
@@ -40,11 +41,23 @@ const CreatePost = observer(({showBoolean}) => {
         formData.append('media1', fileArray[1])
         formData.append('media2', fileArray[2])
         formData.append('media3', fileArray[3])
+        // console.log(window.location.pathname.split('/').length<4)
 
+
+        console.log(board.createPostThreadId)
         createPost(formData).then(() => {
             board.setShowCreatePost(false)
-            board.fetchPostList(window.location.pathname.split('/')[3])
+            if(window.location.pathname.split('/').length<4){
+                if(window.location.pathname.endsWith('/')){
+                    history.push(window.location.pathname+'res/'+board.createPostThreadId || window.location.pathname.split('/')[3])
+                } else {
+                    history.push(window.location.pathname+'/res/'+board.createPostThreadId || window.location.pathname.split('/')[3])
+                }
+
+            }
+            board.fetchPostList(window.location.pathname.split('/')[3]).then(()=>window.scroll(0, 1000000000))
             board.setCreatePostText('')
+
         })
     }
 
@@ -86,11 +99,8 @@ const CreatePost = observer(({showBoolean}) => {
 
                         <Button
                             variant="outline-success"
-                            onClick={createThread}
+                            onClick={createThreadPost}
                         >Create</Button>
-
-
-
 
 
                     </Form>

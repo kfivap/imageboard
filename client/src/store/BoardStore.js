@@ -10,6 +10,7 @@ export default class UserStore {
         this._showCreatePost = false
         this._createPostText = ''
         this._postsList = []
+        this._createPostThreadId = 0
         makeAutoObservable(this)
     }
 
@@ -24,6 +25,9 @@ export default class UserStore {
     }
     setPostList(list){
         this._postsList = list
+    }
+    setCreatePostThreadId(id){
+        this._createPostThreadId = id
     }
 
      async fetchPostList(link){
@@ -52,6 +56,9 @@ export default class UserStore {
     }
     get postsList(){
         return this._postsList
+    }
+    get createPostThreadId(){
+        return this._createPostThreadId
     }
 
 }

@@ -11,14 +11,15 @@ const ThreadPosts = observer(({post, index}) => {
     // console.log(process.env.REACT_APP_API_URL)
     const {board} =useContext(Context)
  const CreatePostHandler = (id) =>{
-
+     console.log(post.threadId)
+     board.setCreatePostThreadId(post.threadId)
         board.setShowCreatePost(true)
      if(board.createPostText === ''){
-         console.log(1)
+         // console.log(1)
          board.setCreatePostText(board.createPostText + '>>'+id + '\n')
 
      }  else {
-         console.log(3)
+         // console.log(3)
          board.setCreatePostText(board.createPostText + '\n>>'+id)
 
      }
@@ -29,21 +30,21 @@ const ThreadPosts = observer(({post, index}) => {
 
     return (
         <div>
-            <Card.Header>{post.author} / {parseDate(post.createdAt)}
+            <Card.Header>{post?.author} / {parseDate(post?.createdAt)}
                 &nbsp;
                 &nbsp;
                 &nbsp;
                <span className={"appLink"}
-               onClick={()=>CreatePostHandler(post.id)}
-               >№{post.id}</span>
+               onClick={()=>CreatePostHandler(post?.id)}
+               >№{post?.id}</span>
                 &nbsp;
                 &nbsp;
                 &nbsp;
                 <span className={'postIndex'}>#{index}</span>
             </Card.Header>
-            <Card.Body>{post.text}</Card.Body>
+            <Card.Body>{post?.text}</Card.Body>
             <span>
-                         {post.media ? JSON.parse(post.media).map((img, index) =>
+                         {post?.media ? JSON.parse(post.media).map((img, index) =>
                              {if(img===null){
                                  return null
                              }

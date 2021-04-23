@@ -89,10 +89,16 @@ class postController {
         if(!threadId){
             return res.status(400).json({message: "threadId not stated"})
         }
-        let posts = await Post.findOne({where:{
+        let count = await Post.count({
+            where:{threadId}
+        })
+        console.log(count)
+        let posts = await Post.findAndCountAll({where:{
                 threadId
-            }})
-        return res.json({posts})
+            }, offset: count-2})
+        let opPost = await Post.findOne({where:{threadId}})
+
+        return res.json({posts, opPost})
 
     }
 

@@ -54,7 +54,7 @@ let address = window.location.pathname.slice(1)
             </div>
             {
                 threads?.map((thread, index) =>
-                    <ThreadPreview threadInfo={thread} key={index}/>
+                    <ThreadPreview threadInfo={thread} key={'key'+index}/>
                 )
             }
         </div>

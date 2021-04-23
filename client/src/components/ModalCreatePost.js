@@ -5,7 +5,7 @@ import {Context} from "../index";
 
 const ModalCreatePost = observer(() => {
     const {board} =useContext(Context)
-    console.log(board.showCreatePost)
+    // console.log(board.showCreatePost)
     if(!board.showCreatePost){
         return null
     }
