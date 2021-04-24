@@ -7,12 +7,11 @@ import {observer} from "mobx-react-lite";
 import ReactHtmlParser from 'react-html-parser'
 
 
-
 const ThreadPosts = observer(({post, index}) => {
 
     const {board} = useContext(Context)
     const CreatePostHandler = (id) => {
-        console.log(post.threadId)
+        // console.log(post.threadId)
         board.setCreatePostThreadId(post.threadId)
         board.setShowCreatePost(true)
         if (board.createPostText === '') {
@@ -34,8 +33,8 @@ const ThreadPosts = observer(({post, index}) => {
     let tempArray = []
 
     // let dangerCount = 500
-    while (true){
-        if(tempText.match(re)){
+    while (true) {
+        if (tempText.match(re)) {
             let len = tempText.match(re)[0].length
             let ind = tempText.match(re).index
             tempArray.push(tempText.slice(0, len + ind))
@@ -43,7 +42,7 @@ const ThreadPosts = observer(({post, index}) => {
             tempText = tempText.slice(len + ind)
         }
 
-        if(!tempText.match(re)){
+        if (!tempText.match(re)) {
             tempArray.push(tempText)
             break
         }
@@ -56,21 +55,16 @@ const ThreadPosts = observer(({post, index}) => {
         return (element)
     })
 
-
-
-
-
-
     post.text = arrayWithHrefs.length === 0 ? post.text : arrayWithHrefs.join('')
     const lineBreak = post.text.split('\n')
-    console.log(lineBreak)
+    // console.log(lineBreak)
 
 
     return (
-        <div>
+        <div className={'postFull'}>
 
             <a id={post?.id}> </a>
-            <Card.Header>{post?.author} / {parseDate(post?.createdAt)}
+            <div className={'postHeader'}>{post?.author} / {parseDate(post?.createdAt)}
                 &nbsp;
                 &nbsp;
                 &nbsp;
@@ -81,12 +75,12 @@ const ThreadPosts = observer(({post, index}) => {
                 &nbsp;
                 &nbsp;
                 <span className={'postIndex'}>#{index}</span>
-            </Card.Header>
-            <Card.Body>{
-                lineBreak.map((e, i)=>
-               <span key={i}>{ReactHtmlParser(e)}<br/></span> )
+            </div>
+            <div className={'postText'}>{
+                lineBreak.map((e, i) =>
+                    <span key={i} className={'postTextSpan'}>{ReactHtmlParser(e)}<br/></span>)
             }
-            </Card.Body>
+            </div>
             {/*<Card.Body>{ReactHtmlParser(post?.text)}</Card.Body>*/}
             {/*<Card.Body>{tempArray.length===0 ? post.text : tempArray.map((element, key)=>*/}
             {/*    <TestComponent key={key} element={element}/>*/}
