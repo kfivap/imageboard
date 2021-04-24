@@ -1,6 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {getPosts} from "../http/PostAPI";
-import {NOTFOUND_ROUTE} from "../utils/consts";
+
 
 export default class UserStore {
 

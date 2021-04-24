@@ -18,7 +18,6 @@ const CreatePost = observer(({showBoolean}) => {
     }
 
     const [options, setOptions] = useState('')
-    const [text, setText] = useState('')
     const [fileArray, setFileArray] = useState([])
 
     const loadFile = function (event) {
@@ -29,6 +28,7 @@ const CreatePost = observer(({showBoolean}) => {
         }
 
     }
+    // update
     const createThreadPost = () => {
         const formData = new FormData()
 

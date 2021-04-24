@@ -4,7 +4,6 @@ import {useHistory} from "react-router-dom";
 import {getPreview} from "../http/PostAPI";
 import ImageComponent from "./ImageComponent";
 import ThreadPosts from "./ThreadPosts";
-import index from "jwt-decode";
 import {Context} from "../index";
 
 const ThreadPreview = ({threadInfo}) => {
@@ -79,13 +78,14 @@ const ThreadPreview = ({threadInfo}) => {
                     null
                 }
             </div>
+            <div className={'previewPosts'}>
             {posts?.rows?.map((post, index) =>{
 
                 return(
                 <ThreadPosts post={post} key={index} index={posts.count-2+index}/>)
             })
             }
-
+            </div>
 
         </div>
     );

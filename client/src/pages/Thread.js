@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {observer} from "mobx-react-lite";
-import {getPosts} from "../http/PostAPI";
+
 import ThreadPosts from "../components/ThreadPosts";
 import CreatePost from "../components/CreatePost";
 import {NOTFOUND_ROUTE} from "../utils/consts";

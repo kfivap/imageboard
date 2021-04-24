@@ -43,6 +43,7 @@ const ImageExpanded = observer(() => {
     return (
         <img src={board.expandedMedia}
              className={'threadImageFull'}
+             alt={' '}
              style={{maxWidth: size + 'vw', maxHeight: size+'vh'}}
              onMouseOver={()=>{disableScrolling()}}
              onMouseLeave={()=>{enableScrolling()}}

@@ -21,6 +21,7 @@ const ImageComponent = observer(({src}) => {
         <span>
             <img src={src}
                  className={'threadImagePreview'}
+                 alt={' '}
                  onClick={() => {
                      board.setExpandedMedia(src)
                  }}
