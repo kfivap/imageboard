@@ -2,6 +2,7 @@ const {Thread, User, Board, Post} = require('../models/models')
 const checkUserMiddleware = require('../middleware/checkUserMiddleware')
 const uuid = require('uuid')
 const path = require('path')
+const deletePost = require("../functions/deletePost")
 
 class threadController {
     async Create(req, res, next){
@@ -93,10 +94,42 @@ class threadController {
 
     }
     async Update(req, res, next){
+
         return res.json({message: 'Route works but do nothing'})
     }
     async Delete(req, res, next){
-        return res.json({message: 'Route works but do nothing'})
+        const {threadId} = req.query
+        if(!threadId){
+            return res.status(400).json({message: 'threadId not stated'})
+        }
+        console.log(threadId)
+        let userId = checkUserMiddleware(req).id
+        if(!userId){
+            return res.status(403).json({message: 'Forbidden'})
+        }
+        let data = await User.findOne({
+            where: {
+                id: userId
+            }
+        })
+
+        if (data.role !== 'ADMIN' && data.role !== 'MODERATOR' ) {
+            return res.status(401).json({message: 'Unauthorized'})
+        }
+
+        const threadPosts = await Post.findAll({
+            where:{threadId},
+            attributes: ['id']
+        })
+        const threadPostsJSON =JSON.parse(JSON.stringify(threadPosts))
+        threadPostsJSON.map(async (obj)=>{
+          await deletePost(obj.id)
+
+        })
+
+        const deleted = await Thread.destroy({where:{id: threadId}})
+
+        return res.json(deleted)
     }
 
 

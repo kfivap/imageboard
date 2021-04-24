@@ -5,6 +5,7 @@ import {getPreview} from "../http/PostAPI";
 import ImageComponent from "./ImageComponent";
 import ThreadPosts from "./ThreadPosts";
 import {Context} from "../index";
+import ThreadButtonsAdmin from "./Admin/ThreadButtonsAdmin";
 
 const ThreadPreview = ({threadInfo}) => {
 
@@ -66,7 +67,7 @@ const ThreadPreview = ({threadInfo}) => {
                 <span className={'postIndex'}>#0(OP)</span>
 
                 <span onClick={() => history.push(window.location.pathname + '/res/' + threadInfo.id)}> To thread</span>
-
+<ThreadButtonsAdmin threadId={threadInfo.id}/>
                 <div className={'opText'}>{opPost?.text}</div>
 
 

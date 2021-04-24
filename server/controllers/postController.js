@@ -1,7 +1,10 @@
-const {Thread, User, Board, Post} = require('../models/models')
+const deletePost = require("../functions/deletePost")
+
+const {Thread, User, Post} = require('../models/models')
 const checkUserMiddleware = require('../middleware/checkUserMiddleware')
 const uuid = require('uuid')
 const path = require('path')
+const fs = require('fs')
 
 class postController {
     async Create(req, res, next){
@@ -81,7 +84,52 @@ class postController {
         return res.json({message: 'Route works but do nothing'})
     }
     async Delete(req, res, next){
-        return res.json({message: 'Route works but do nothing'})
+        const {postId}= req.query
+
+        let userId = checkUserMiddleware(req).id
+        if(!userId){
+            return res.status(403).json({message: 'Forbidden'})
+        }
+        let data = await User.findOne({
+            where: {
+                id: userId
+            }
+        })
+
+        if (data.role !== 'ADMIN' && data.role !== 'MODERATOR' ) {
+            return res.status(401).json({message: 'Unauthorized'})
+        }
+
+       //  const candidateDelete = await Post.findOne({
+       //      where: {id: postId}
+       //  })
+       //  if(!candidateDelete){
+       //      return res.status(401).json({message: 'post not found'})
+       //  }
+       //
+       // const mediaList = JSON.parse(candidateDelete.media)
+       //  mediaList.map(media=>{
+       //      const filePath = path.resolve(__dirname, '..', 'static', media)
+       //
+       //          fs.unlink(filePath, (err) => {
+       //              if(err){
+       //                  console.error(err)
+       //              } else {
+       //                  console.log('removed')
+       //              }
+       //          })
+       //  })
+       //
+       //  const deleted = await Post.destroy({
+       //      where: {id: postId}
+       //  })
+
+       const deleted = await deletePost(postId)
+        console.log(deleted)
+
+
+
+        return res.json(deleted)
     }
 
     async ReadPreview(req, res, next){

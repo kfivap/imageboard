@@ -1,4 +1,4 @@
-import { $host} from "./index";
+import {$authHost, $host} from "./index";
 
 export const getPosts = async (thread) =>{
 
@@ -18,5 +18,11 @@ export const getPreview = async (thread) =>{
 
     const {data} = await $host.get
     (`api/post/getPreview?threadId=${thread}`)
+    return data
+}
+export const deletePost = async (post) =>{
+
+    const {data} = await $authHost.delete
+    (`api/post/delete?postId=${post}`)
     return data
 }

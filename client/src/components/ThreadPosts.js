@@ -1,15 +1,18 @@
 import React, {useContext} from 'react';
-import Card from "react-bootstrap/Card";
+
 import {parseDate} from "../functions/parseDate";
 import ImageComponent from "./ImageComponent";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import ReactHtmlParser from 'react-html-parser'
+import PostButtonsAdmin from "./Admin/PostButtonsAdmin";
+
 
 
 const ThreadPosts = observer(({post, index}) => {
 
     const {board} = useContext(Context)
+
     const CreatePostHandler = (id) => {
         // console.log(post.threadId)
         board.setCreatePostThreadId(post.threadId)
@@ -59,9 +62,18 @@ const ThreadPosts = observer(({post, index}) => {
     const lineBreak = post.text.split('\n')
     // console.log(lineBreak)
 
+    // console.log(index)
 
     return (
-        <div className={'postFull'}>
+        <div className={index===0? 'postFull' : 'postFull notOPsPosts'}
+        style={index===0? {
+            width: 100+'%'
+        }
+        :
+         null
+        }
+        >
+
 
             <a id={post?.id}> </a>
             <div className={'postHeader'}>{post?.author} / {parseDate(post?.createdAt)}
@@ -76,6 +88,7 @@ const ThreadPosts = observer(({post, index}) => {
                 &nbsp;
                 <span className={'postIndex'}>#{index}</span>
                 &nbsp;
+                <PostButtonsAdmin postId={post?.id}/>
             </div>
             <span>
 

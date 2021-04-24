@@ -7,6 +7,7 @@ import {NOTFOUND_ROUTE} from "../utils/consts";
 import {useHistory} from "react-router-dom";
 import {Context} from "../index";
 import {toJS} from "mobx";
+import ThreadButtonsAdmin from "../components/Admin/ThreadButtonsAdmin";
 
 const Thread = observer(() => {
 
@@ -14,7 +15,8 @@ const Thread = observer(() => {
     const history = useHistory()
     const {board} =useContext(Context)
 
-
+const threadId = window.location.pathname.split('/')[3]
+    console.log(threadId)
     useEffect(() => {
 
         async function fetchData() {
@@ -37,13 +39,15 @@ const Thread = observer(() => {
 
 
 
-    console.log(toJS(board.postsList.posts))
+    // console.log(toJS(board.postsList.posts))
 
 
     return (
         <div>
 
             Thread {window.location.pathname}
+            <ThreadButtonsAdmin threadId={threadId}/>
+
             {toJS(board.postsList.posts)?.rows.map((post, index)=>
                 <ThreadPosts key={index} post={post} index={index}/>
 

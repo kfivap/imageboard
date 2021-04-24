@@ -1,4 +1,4 @@
-import { $host} from "./index";
+import {$authHost, $host} from "./index";
 
 export const getThread = async (board) =>{
 
@@ -11,5 +11,11 @@ export const createThreadAPI = async (formData) =>{
 
     const {data} = await $host.post(`api/thread/create`, formData)
 
+    return data
+}
+export const deleteThread = async (thread) =>{
+
+    const {data} = await $authHost.delete
+    (`api/thread/delete?threadId=${thread}`)
     return data
 }
