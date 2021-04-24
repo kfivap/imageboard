@@ -43,15 +43,18 @@ const ThreadPosts = observer(({post, index}) => {
 
     let test = tempArray.map(element => {
         let answer = element.match(re) ? element.match(re)[0] : null
-        return (element = element.replace(re, `<a  href="#${answer?.slice(2)}">${answer}</a>`))
+        element = element.replace(re, `<a  href="#${answer?.slice(2)}">${answer}</a>`)
+        return (element)
     })
     post.text = test.length === 0 ? post.text : test.join('')
+    const lineBreak = post.text.split('\n')
+    // console.log(lineBreak)
 
-    console.log(window.location.pathname)
+    // console.log(window.location.pathname)
     return (
         <div>
 
-            <a id={post?.id}>{post?.id}</a>
+            <a id={post?.id}> </a>
             <Card.Header>{post?.author} / {parseDate(post?.createdAt)}
                 &nbsp;
                 &nbsp;
@@ -64,7 +67,12 @@ const ThreadPosts = observer(({post, index}) => {
                 &nbsp;
                 <span className={'postIndex'}>#{index}</span>
             </Card.Header>
-            <Card.Body>{ReactHtmlParser(post?.text)}</Card.Body>
+            <Card.Body>{
+                lineBreak.map((e, i)=>
+               <span key={i}>{ReactHtmlParser(e)}<br/></span> )
+            }
+            </Card.Body>
+            {/*<Card.Body>{ReactHtmlParser(post?.text)}</Card.Body>*/}
             {/*<Card.Body>{tempArray.length===0 ? post.text : tempArray.map((element, key)=>*/}
             {/*    <TestComponent key={key} element={element}/>*/}
             {/*)}</Card.Body>*/}
