@@ -5,7 +5,7 @@ import ImageComponent from "./ImageComponent";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import ReactHtmlParser from 'react-html-parser'
-import {useHistory} from 'react-router-dom'
+
 
 
 const ThreadPosts = observer(({post, index}) => {
@@ -32,25 +32,40 @@ const ThreadPosts = observer(({post, index}) => {
     let tempText = post.text
     const re = />>[0-9]+/
     let tempArray = []
-    let count = 0
-    while (tempText.match(re) && count < 5) {
-        let len = tempText.match(re)[0].length
-        let ind = tempText.match(re).index
-        tempArray.push(tempText.slice(0, len + ind))
-        tempText = tempText.slice(len + ind)
 
+    // let dangerCount = 500
+    while (true){
+        if(tempText.match(re)){
+            let len = tempText.match(re)[0].length
+            let ind = tempText.match(re).index
+            tempArray.push(tempText.slice(0, len + ind))
+
+            tempText = tempText.slice(len + ind)
+        }
+
+        if(!tempText.match(re)){
+            tempArray.push(tempText)
+            break
+        }
     }
 
-    let test = tempArray.map(element => {
+    let arrayWithHrefs = tempArray.map(element => {
         let answer = element.match(re) ? element.match(re)[0] : null
         element = element.replace(re, `<a  href="#${answer?.slice(2)}">${answer}</a>`)
+
         return (element)
     })
-    post.text = test.length === 0 ? post.text : test.join('')
-    const lineBreak = post.text.split('\n')
-    // console.log(lineBreak)
 
-    // console.log(window.location.pathname)
+
+
+
+
+
+    post.text = arrayWithHrefs.length === 0 ? post.text : arrayWithHrefs.join('')
+    const lineBreak = post.text.split('\n')
+    console.log(lineBreak)
+
+
     return (
         <div>
 
