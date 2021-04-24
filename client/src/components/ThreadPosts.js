@@ -75,17 +75,8 @@ const ThreadPosts = observer(({post, index}) => {
                 &nbsp;
                 &nbsp;
                 <span className={'postIndex'}>#{index}</span>
+                &nbsp;
             </div>
-            <div className={'postText'}>{
-                lineBreak.map((e, i) =>
-                    <span key={i} className={'postTextSpan'}>{ReactHtmlParser(e)}<br/></span>)
-            }
-            </div>
-            {/*<Card.Body>{ReactHtmlParser(post?.text)}</Card.Body>*/}
-            {/*<Card.Body>{tempArray.length===0 ? post.text : tempArray.map((element, key)=>*/}
-            {/*    <TestComponent key={key} element={element}/>*/}
-            {/*)}</Card.Body>*/}
-            {/*maybe use it in future but not now*/}
             <span>
 
                          {post?.media ? JSON.parse(post.media).map((img, index) => {
@@ -103,6 +94,17 @@ const ThreadPosts = observer(({post, index}) => {
                              null
                          }
             </span>
+            <div className={'postText'}>{
+                lineBreak.map((e, i) =>
+                    <span key={i} className={'postTextSpan'}>{ReactHtmlParser(e)}<br/></span>)
+            }
+            </div>
+            {/*<Card.Body>{ReactHtmlParser(post?.text)}</Card.Body>*/}
+            {/*<Card.Body>{tempArray.length===0 ? post.text : tempArray.map((element, key)=>*/}
+            {/*    <TestComponent key={key} element={element}/>*/}
+            {/*)}</Card.Body>*/}
+            {/*maybe use it in future but not now*/}
+
 
         </div>
     );

@@ -41,17 +41,32 @@ const ImageExpanded = observer(() => {
     }
 
     return (
+        <div className={'threadImageFullDiv'}
+             style={{maxWidth: 'max-content', maxHeight: 'max-content'}}
+             onMouseOver={()=>{disableScrolling()}}
+             onMouseLeave={()=>{enableScrolling()}}
+
+             onWheel={(e) => onWheelHandler(e)}
+        >
         <img src={board.expandedMedia}
              className={'threadImageFull'}
              alt={' '}
              style={{maxWidth: size + 'vw', maxHeight: size+'vh'}}
-             onMouseOver={()=>{disableScrolling()}}
-             onMouseLeave={()=>{enableScrolling()}}
              onClick={() => {
                  board.setExpandedMedia('')
              }}
-             onWheel={(e) => onWheelHandler(e)}
+
         />
+            <div>
+                    <a
+                        href={board.expandedMedia}
+                        target={'_blank'}
+                    >
+                        Original
+                    </a>
+
+            </div>
+        </div>
     );
 })
 

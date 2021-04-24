@@ -48,7 +48,12 @@ const Thread = observer(() => {
                 <ThreadPosts key={index} post={post} index={index}/>
 
             )}
-            <CreatePost/>
+            <br/>
+            <CreatePost fromBottom={true}/>
+
+            <br/>
+            <br/>
+
         </div>
     );
 })

@@ -50,19 +50,27 @@ position: relative;
 /*  max-height: 80vh;*/
 /*}*/
 .threadImageFull{
+
+  margin-right: auto;
+  margin-left: auto;
+
+}
+.threadImageFullDiv{
   background-color: #eee;
   position: fixed;
-  /*width: 40%;*/
   text-align: center;
   top: 50%;
   left: 50%;
-  padding: 10px;
+  padding: 3px;
   transform: translate(-50%, -50%);
+
 }
+
 .threadImagePreview{
   /*position: absolute;*/
-max-width: 150px;
-  max-height: 150px;
+max-width: 180px;
+  max-height: 180px;
+  padding: 4px;
 }
 
 .postIndex{
@@ -82,7 +90,7 @@ max-width: 150px;
   transform: translate(-50%, -50%);
 }
 .threadPreview{
-  border: #000e26 solid 1px;
+  /*border: #000e26 solid 1px;*/
   margin: 10px 0 10px 0;
   padding: 5px;
 }
@@ -92,8 +100,12 @@ max-width: 150px;
 .opPost{
   padding-left: 10px;
   padding-top: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
   background-color: #dbdbdb;
+  border: rgb(182, 175, 175) solid 1px;
+  border-radius: 3px;
+
 }
 .previewPosts{
   margin-left: 10%;
@@ -118,13 +130,17 @@ max-width: 150px;
   margin-bottom: 7px;
   background-color: rgba(238, 234, 234, 0.48);
   width: max-content;
-  max-width: 100%;
+  max-width: 95%;
   margin-left: auto;
   margin-right: auto;
 }
-@media screen and (min-width: 760px){
+@media screen and (min-width: 640px){
   .postFull{
     margin-left: 0;
     margin-right: 0;
+    max-width: 100%;
 }
+  .previewPosts{
+    margin-left: 20px;
+  }
 }

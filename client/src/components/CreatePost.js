@@ -7,7 +7,7 @@ import {useHistory} from 'react-router-dom'
 import {createPost} from "../http/PostAPI";
 import {Context} from "../index";
 
-const CreatePost = observer(({showBoolean}) => {
+const CreatePost = observer(({showBoolean, fromBottom}) => {
     const [show, setShow] = useState(showBoolean || false)
     const [update, setUpdate] = useState(false)
     const {board} = useContext(Context)
@@ -15,6 +15,7 @@ const CreatePost = observer(({showBoolean}) => {
     const toggleHandler = () => {
         setShow(prevState => !prevState)
         board.setShowCreatePost(false)
+        setTimeout(()=>window.scroll(0,1000000000000), 0)
     }
 
     const [options, setOptions] = useState('')
@@ -120,7 +121,9 @@ const CreatePost = observer(({showBoolean}) => {
                 :
 
                 <button onClick={toggleHandler} className={'orange bold buttonNone'}>Post here</button>
+
             }
+
 
 
         </div>
