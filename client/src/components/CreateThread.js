@@ -9,6 +9,7 @@ import {createThreadAPI} from "../http/ThreadAPI";
 const CreateThread = observer(() => {
     const [show, setShow] = useState(false)
     const [update, setUpate] = useState(false)
+    const [disabled, setDisabled] =useState(true)
 
     const toggleHandler = () => {
         setShow(prevState => !prevState)
@@ -65,7 +66,16 @@ const CreateThread = observer(() => {
                                 as="textarea" rows={3}
                                 placeholder="text"
                                 value={text}
-                                onChange={(e) => setText(e.target.value)}
+                                onChange={(e) => {
+                                    setText(e.target.value)
+                                    if(e.target.value.trim()===''){
+                                        setDisabled(true)
+                                        return
+                                    }
+                                    if(e.target.value.trim()!==''){
+                                        setDisabled(false)
+                                    }
+                                }}
                             />
                         </Form.Group>
 
@@ -86,6 +96,7 @@ const CreateThread = observer(() => {
                             <button
                                 className={'createButton'}
                                 onClick={createThread}
+                                disabled={disabled}
                             >Create</button>
                         </Form.Group>
 

@@ -10,6 +10,7 @@ import {Context} from "../index";
 const CreatePost = observer(({showBoolean, fromBottom}) => {
     const [show, setShow] = useState(showBoolean || false)
     const [update, setUpdate] = useState(false)
+    const [disabled, setDisabled] =useState(true)
     const {board} = useContext(Context)
     const history = useHistory()
     const toggleHandler = () => {
@@ -83,7 +84,17 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
                                 as="textarea" rows={12}
                                 placeholder="text"
                                 value={board.createPostText}
-                                onChange={(e) => board.setCreatePostText(e.target.value)}
+                                onChange={(e) => {
+                                    board.setCreatePostText(e.target.value)
+                                if(e.target.value.trim()===''){
+                                    setDisabled(true)
+                                    return
+                                }
+                                if(e.target.value.trim()!==''){
+                                    setDisabled(false)
+                                }
+
+                                }}
                             />
                         </Form.Group>
 
@@ -104,6 +115,7 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
                         <button
                             className={'createButton'}
                             onClick={createThreadPost}
+                            disabled={disabled}
                         >Create</button>
                         </Form.Group>
 
