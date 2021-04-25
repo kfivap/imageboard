@@ -11,6 +11,7 @@ export const createThreadAPI = async (formData) =>{
 
     const {data} = await $host.post(`api/thread/create`, formData)
 
+
     return data
 }
 export const deleteThread = async (thread) =>{

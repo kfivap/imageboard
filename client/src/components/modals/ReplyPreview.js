@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
+import ReplyPreviewModal from "./ReplyPreviewModal";
 
 
 const ReplyPreview = observer(({element}) => {
@@ -16,31 +17,39 @@ const ReplyPreview = observer(({element}) => {
 
     useEffect(()=> {
         if (element.match(re)) {
-            console.log(element.match(re))
+            // console.log(element.match(re))
             // console.log(element.match(re)[0])
             // console.log(element.match(re)[0].length)
             const matched = element.match(re)
             const len = element.match(re)[0].length
-            console.log('text before: ', element.slice(0, element.match(re).index))
+            // console.log('text before: ', element.slice(0, element.match(re).index))
             setTextBefore(element.slice(0, matched.index))
             setTextAfter(element.slice(matched.index + len))
             setReply(matched[0])
 
-            console.log('text after: ', element.slice(element.match(re).index + len))
+            // console.log('text after: ', element.slice(element.match(re).index + len))
         }
         if(!element.match(re)){
             setTextBefore(element)
-            console.log(count)
+            // console.log(count)
 
         }
     }, [re, element])
+// if(reply===''){
+//     return
+// }
 
     return (
         <>
 
-            {textBefore} {reply} {textAfter}
+            {textBefore}
+            {reply===''? null :
+                <ReplyPreviewModal
+                    reply={reply}
+                />
+            }
 
-            {/*{element}*/}
+        {textAfter}
 <br/>
 
         </>

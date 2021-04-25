@@ -26,3 +26,9 @@ export const deletePost = async (post) =>{
     (`api/post/delete?postId=${post}`)
     return data
 }
+
+export const getOnePost = async (post)=>{
+    const {data} = await $host.get
+    (`api/post/getOne?postId=${post}`)
+    return data
+}

@@ -128,7 +128,7 @@ max-width: 180px;
   border: rgb(238, 234, 234) solid 1px;
   border-radius: 3px;
   margin-bottom: 7px;
-  background-color: rgba(238, 234, 234, 0.48);
+  background-color: rgb(246, 242, 242);
   width: max-content;
   max-width: 95%;
   margin-left: auto;
@@ -187,4 +187,8 @@ max-width: 180px;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+}
+.replyPostPreview{
+  position: absolute;
+  margin-left: 20px;
 }

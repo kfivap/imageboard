@@ -24,6 +24,7 @@ export default class UserStore {
         this._createPostText = text
     }
     setPostList(list){
+        // console.log(list)
         this._postsList = list
     }
     setCreatePostThreadId(id){

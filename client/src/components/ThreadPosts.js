@@ -11,7 +11,14 @@ import ReplyPreview from "./modals/ReplyPreview";
 
 
 const ThreadPosts = observer(({post, index}) => {
+if(!post?.id){
+    return (<div className={'postFull notOPsPosts'}
 
+        >
+            Post not found
+        </div>
+    )
+}
     const {board} = useContext(Context)
 
     const CreatePostHandler = (id) => {

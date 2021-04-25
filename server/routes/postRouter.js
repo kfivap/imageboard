@@ -9,6 +9,7 @@ router.get('/get', postController.Read)
 router.put('/update', postController.Update)
 router.delete('/delete', postController.Delete)
 router.get('/getPreview', postController.ReadPreview)
+router.get('/getOne', postController.getOnePost)
 
 
 

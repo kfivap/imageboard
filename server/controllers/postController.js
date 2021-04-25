@@ -71,9 +71,10 @@ class postController {
         if(!threadId){
             return res.status(400).json({message: "threadId not stated"})
         }
-        let posts = await Post.findAndCountAll({where:{
-                threadId
-            }})
+        let posts = await Post.findAndCountAll({
+            where: {threadId},
+            order: [['id', 'ASC']]
+        })
         if(!posts.count){
             return res.status(404).json({message: "thread not found"})
         }
@@ -163,6 +164,18 @@ class postController {
 
     }
 
+
+    async getOnePost(req, res, next){
+        const {postId} = req.query
+        if(!postId){
+            return res.status(400).json({message: "postId not stated"})
+        }
+        let post = await Post.findOne({
+            where:{id: postId}
+        })
+        return res.json(post)
+
+    }
 
 }
 

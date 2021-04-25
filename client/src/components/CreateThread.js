@@ -27,7 +27,7 @@ const CreateThread = observer(() => {
         }
 
     }
-    const createThread = () => {
+    const createThread = async () => {
         const formData = new FormData()
 
         formData.append('board', window.location.pathname.slice(1))
@@ -41,8 +41,7 @@ const CreateThread = observer(() => {
 
 
 
-        createThreadAPI(formData).then(() => { window.location.reload()
-        })
+await        createThreadAPI(formData).then()
     }
 
 
@@ -68,6 +67,7 @@ const CreateThread = observer(() => {
                                 value={text}
                                 onChange={(e) => {
                                     setText(e.target.value)
+                                    // console.log(text)
                                     if(e.target.value.trim()===''){
                                         setDisabled(true)
                                         return
@@ -82,17 +82,20 @@ const CreateThread = observer(() => {
 
                             <label htmlFor="file-upload" className="custom-file-upload">
                                 Upload Files
-                            </label>
-                            <input
-                                required multiple
-                                accept=".jpg,.png"
-                                type="file"
-                                name="file"
-                                onChange={loadFile}
-                                id="file-upload"
-                                className={'inputHide'}
 
-                            />
+                            </label>
+                        <input
+                            required multiple
+                            accept=".jpg,.png"
+                            type="file"
+                            name="file"
+                            onChange={loadFile}
+                            id="file-upload"
+                            className={'inputHide'}
+
+                        />
+
+
                             <button
                                 className={'createButton'}
                                 onClick={createThread}

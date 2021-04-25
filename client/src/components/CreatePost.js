@@ -100,17 +100,18 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
 
                         <label htmlFor="file-upload" className="custom-file-upload">
                             Upload Files
-                        </label>
-                        <input
-                            required multiple
-                            accept=".jpg,.png"
-                            type="file"
-                            name="file"
-                            onChange={loadFile}
-                            id="file-upload"
-                            className={'inputHide'}
+                            <input
+                                required multiple
+                                accept=".jpg,.png"
+                                type="file"
+                                name="file"
+                                onChange={loadFile}
+                                id="file-upload"
+                                className={'inputHide'}
 
-                        />
+                            />
+                        </label>
+
                         <button
                             className={'createButton'}
                             onClick={createThreadPost}
