@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
 import Form from 'react-bootstrap/Form'
-import Button from "react-bootstrap/Button";
 import UploadImagesPreview from "./UploadImagesPreview";
 import {observer} from "mobx-react-lite";
 import {useHistory} from 'react-router-dom'
@@ -70,7 +69,7 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
                 <>
                     <button onClick={toggleHandler} className={'orange bold buttonNone mb-2'}>Close posting form
                     </button>
-                    <Form>
+                    <form>
                         <Form.Group controlId="formOptions">
                             <Form.Control
                                 placeholder="options"
@@ -98,7 +97,7 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
                             />
                         </Form.Group>
 
-                        <Form.Group>
+
                         <label htmlFor="file-upload" className="custom-file-upload">
                             Upload Files
                         </label>
@@ -117,9 +116,9 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
                             onClick={createThreadPost}
                             disabled={disabled}
                         >Create</button>
-                        </Form.Group>
 
-                    </Form>
+
+                    </form>
                     {fileArray.map((file, index) =>
                         <span key={index} className={'uploadSpan'}>
                             <button className={'buttonNone removeUploadBtn'}

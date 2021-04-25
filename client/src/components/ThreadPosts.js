@@ -6,6 +6,7 @@ import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import ReactHtmlParser from 'react-html-parser'
 import PostButtonsAdmin from "./Admin/PostButtonsAdmin";
+import ReplyPreview from "./modals/ReplyPreview";
 
 
 
@@ -51,9 +52,16 @@ const ThreadPosts = observer(({post, index}) => {
         }
     }
 
+    // let arrayWithHrefs = tempArray.map(element => {
+    //     let answer = element.match(re) ? element.match(re)[0] : null
+    //     element = element.replace(re, `<a  href="#${answer?.slice(2)}">${answer}</a>`)
+    //
+    //     return (element)
+    // })
+
     let arrayWithHrefs = tempArray.map(element => {
         let answer = element.match(re) ? element.match(re)[0] : null
-        element = element.replace(re, `<a  href="#${answer?.slice(2)}">${answer}</a>`)
+        element = element.replace(re, `${answer}`)
 
         return (element)
     })
@@ -92,6 +100,7 @@ const ThreadPosts = observer(({post, index}) => {
             </div>
             <span>
 
+
                          {post?.media ? JSON.parse(post.media).map((img, index) => {
                                  if (img === null) {
                                      return null
@@ -108,8 +117,12 @@ const ThreadPosts = observer(({post, index}) => {
                          }
             </span>
             <div className={'postText'}>{
-                lineBreak.map((e, i) =>
-                    <span key={i} className={'postTextSpan'}>{ReactHtmlParser(e)}<br/></span>)
+                lineBreak.map((e, i) =>{
+                    // console.log(e)
+                    return <ReplyPreview key={i}
+                                         element={e}
+                                         className={'postTextSpan'}
+                    />})
             }
             </div>
             {/*<Card.Body>{ReactHtmlParser(post?.text)}</Card.Body>*/}

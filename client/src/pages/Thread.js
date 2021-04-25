@@ -16,7 +16,7 @@ const Thread = observer(() => {
     const {board} =useContext(Context)
 
 const threadId = window.location.pathname.split('/')[3]
-    console.log(threadId)
+    // console.log(threadId)
     useEffect(() => {
 
         async function fetchData() {

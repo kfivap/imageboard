@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import Form from 'react-bootstrap/Form'
-import Button from "react-bootstrap/Button";
+
 import UploadImagesPreview from "./UploadImagesPreview";
 import {observer} from "mobx-react-lite";
 
@@ -79,7 +79,7 @@ const CreateThread = observer(() => {
                             />
                         </Form.Group>
 
-                        <Form.Group>
+
                             <label htmlFor="file-upload" className="custom-file-upload">
                                 Upload Files
                             </label>
@@ -98,7 +98,7 @@ const CreateThread = observer(() => {
                                 onClick={createThread}
                                 disabled={disabled}
                             >Create</button>
-                        </Form.Group>
+
 
 
 

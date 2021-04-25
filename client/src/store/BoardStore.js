@@ -33,7 +33,7 @@ export default class UserStore {
      async fetchPostList(link){
             try{
                 let data = await getPosts(link)
-                console.log(data)
+                // console.log(data)
                 runInAction(() =>{
                 this._postsList = data
                 })

@@ -6,7 +6,7 @@ import {deleteThread} from "../../http/ThreadAPI";
 
 const ThreadButtonsAdmin = observer(({threadId}) => {
     const {user} =useContext(Context)
-    console.log(threadId)
+    // console.log(threadId)
 
     const deleteClickHandler = async ()=>{
         await deleteThread(threadId)

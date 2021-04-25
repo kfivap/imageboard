@@ -172,7 +172,13 @@ max-width: 180px;
         }
 
 .inputHide {
-  display: none;
+  opacity: 0;
+  z-index: -1000;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top:0;
+  left: 0;
 }
 .custom-file-upload {
   border-radius: 4px;
