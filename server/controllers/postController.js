@@ -11,7 +11,9 @@ class postController {
         try{
             const {author, text, media, threadId} = req.body
             const authorIp = req.ip
-
+            if(text.trim() === ''){
+                return res.status(400).json({message:'Text not stated'})
+            }
             if(!threadId){
                 res.status(400).json({message:'threadId not stated'})
             }
@@ -151,7 +153,7 @@ class postController {
             minus=1
         }
 
-        console.log(count, minus)
+        // console.log(count, minus)
         let posts = await Post.findAndCountAll({where:{
                 threadId
             }, offset: count-minus})

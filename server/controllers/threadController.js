@@ -10,6 +10,11 @@ class threadController {
             const {author, text, media, board} = req.body
             const authorIp = req.ip
 
+            if(text.trim() === ''){
+               return res.status(400).json({message:'Text not stated'})
+            }
+
+
             if(!board){
                 res.status(400).json({message:'BoardId not stated'})
             }
