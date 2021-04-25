@@ -70,19 +70,25 @@ const CreateThread = observer(() => {
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.File
+                            <label htmlFor="file-upload" className="custom-file-upload">
+                                Upload Files
+                            </label>
+                            <input
                                 required multiple
-                                id="exampleFormControlFile1"
-                                label="Example file input"
                                 accept=".jpg,.png"
+                                type="file"
+                                name="file"
                                 onChange={loadFile}
+                                id="file-upload"
+                                className={'inputHide'}
+
                             />
+                            <button
+                                className={'createButton'}
+                                onClick={createThread}
+                            >Create</button>
                         </Form.Group>
 
-                        <Button
-                            variant="outline-success"
-                            onClick={createThread}
-                        >Create</Button>
 
 
 

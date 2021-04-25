@@ -46,8 +46,8 @@ let address = window.location.pathname.slice(1)
     return (
         <div>
             <CreateThread/>
-            Board {window.location.pathname}
-            <br/>
+            {/*Board {window.location.pathname}*/}
+
             <div>{info?.name} - / {info?.shortName}/
                 <br/>
                 {info?.description}

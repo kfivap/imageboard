@@ -22,8 +22,11 @@ const threadId = window.location.pathname.split('/')[3]
         async function fetchData() {
             try{
                 // let data = await getPosts(window.location.pathname.split('/')[3])
-                await board.fetchPostList(window.location.pathname.split('/')[3])
-                // board.setPostList(data)
+               let data= await board.fetchPostList(window.location.pathname.split('/')[3])
+
+                if(!toJS(board.postsList).posts){
+                    history.push(NOTFOUND_ROUTE)
+                }
             } catch (e) {
                 console.log(e)
                 if(e.message === 'Request failed with status code 404'){

@@ -88,21 +88,24 @@ const CreatePost = observer(({showBoolean, fromBottom}) => {
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.File
-                                required multiple
-                                id="exampleFormControlFile1"
-                                label="Example file input"
-                                accept=".jpg,.png"
-                                // onChange={selectFiles}
-                                onChange={loadFile}
-                            />
-                        </Form.Group>
+                        <label htmlFor="file-upload" className="custom-file-upload">
+                            Upload Files
+                        </label>
+                        <input
+                            required multiple
+                            accept=".jpg,.png"
+                            type="file"
+                            name="file"
+                            onChange={loadFile}
+                            id="file-upload"
+                            className={'inputHide'}
 
-                        <Button
-                            variant="outline-success"
+                        />
+                        <button
+                            className={'createButton'}
                             onClick={createThreadPost}
-                        >Create</Button>
-
+                        >Create</button>
+                        </Form.Group>
 
                     </Form>
                     {fileArray.map((file, index) =>
