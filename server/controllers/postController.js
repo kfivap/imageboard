@@ -103,30 +103,6 @@ class postController {
             return res.status(401).json({message: 'Unauthorized'})
         }
 
-       //  const candidateDelete = await Post.findOne({
-       //      where: {id: postId}
-       //  })
-       //  if(!candidateDelete){
-       //      return res.status(401).json({message: 'post not found'})
-       //  }
-       //
-       // const mediaList = JSON.parse(candidateDelete.media)
-       //  mediaList.map(media=>{
-       //      const filePath = path.resolve(__dirname, '..', 'static', media)
-       //
-       //          fs.unlink(filePath, (err) => {
-       //              if(err){
-       //                  console.error(err)
-       //              } else {
-       //                  console.log('removed')
-       //              }
-       //          })
-       //  })
-       //
-       //  const deleted = await Post.destroy({
-       //      where: {id: postId}
-       //  })
-
        const deleted = await deletePost(postId)
         console.log(deleted)
 
@@ -157,7 +133,9 @@ class postController {
         // console.log(count, minus)
         let posts = await Post.findAndCountAll({where:{
                 threadId
-            }, offset: count-minus})
+            },
+            order: [['id', 'ASC']]
+            , offset: count-minus})
         let opPost = await Post.findOne({where:{threadId}})
 
         return res.json({posts, opPost})
