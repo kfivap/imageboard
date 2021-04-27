@@ -11,6 +11,7 @@ const CreateThread = observer(() => {
     const [update, setUpate] = useState(false)
     const [disabled, setDisabled] =useState(true)
 
+
     const toggleHandler = () => {
         setShow(prevState => !prevState)
     }
@@ -20,6 +21,7 @@ const CreateThread = observer(() => {
     const [fileArray, setFileArray] = useState([])
 
     const loadFile = function (event) {
+        console.log(fileArray)
         if (event.target.files.length + fileArray.length < 5) {
             fileArray.push(...event.target.files)
             setFileArray(fileArray)
@@ -27,21 +29,31 @@ const CreateThread = observer(() => {
         }
 
     }
+
     const createThread = async () => {
+        console.log(fileArray)
+        console.log(window.location)
+
         const formData = new FormData()
 
         formData.append('board', window.location.pathname.slice(1))
         formData.append('options', options)
         formData.append('text', text)
 
-        fileArray.forEach((file, index)=>{
-            formData.append('media'+index, file)
-        })
+        formData.append('media0', fileArray[0])
+        formData.append('media1', fileArray[1])
+        formData.append('media2', fileArray[2])
+        formData.append('media3', fileArray[3])
+try {
+ await createThreadAPI(formData)
 
+} catch (e) {
+    console.log(e)
+    formData.forEach(function(val, key, fD){
+        formData.delete(key)
+    });
+}
 
-
-
-await        createThreadAPI(formData).then()
     }
 
 

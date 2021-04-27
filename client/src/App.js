@@ -9,7 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import ImageExpanded from "./components/ImageExpanded";
 import ModalCreatePost from "./components/ModalCreatePost";
-import {toJS} from "mobx";
+
 
 
 const App = observer(() => {

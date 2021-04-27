@@ -85,9 +85,9 @@ class boardController {
                 order: [['id', "DESC"]]
             })
             return res.json({
-                postCount: post.id,
-                threadCount:thread.id,
-                boardCount: board.id
+                postCount: post?.id || 0,
+                threadCount:thread?.id || 0,
+                boardCount: board?.id || 0
             })
         } catch (e) {
             return res.status(500).json({

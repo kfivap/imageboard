@@ -21,7 +21,7 @@ const ThreadButtonsAdmin = observer(({threadId, bump}) => {
     }
 
     const pinClickHandler = async ()=>{
-        const pinRequest = await pinThread(threadId)
+        await pinThread(threadId)
        setPinned(prevState => !prevState)
 
     }
