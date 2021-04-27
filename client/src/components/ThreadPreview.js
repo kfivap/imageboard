@@ -67,7 +67,7 @@ const ThreadPreview = ({threadInfo}) => {
                 <span className={'postIndex'}>#0(OP)</span>
 
                 <span onClick={() => history.push(window.location.pathname + '/res/' + threadInfo.id)}> To thread</span>
-<ThreadButtonsAdmin threadId={threadInfo.id}/>
+<ThreadButtonsAdmin threadId={threadInfo.id} bump={threadInfo.bump}/>
                 <div className={'opText'}>{opPost?.text}</div>
 
 

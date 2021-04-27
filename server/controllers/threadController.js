@@ -59,11 +59,11 @@ class threadController {
             }
 
             let newThread = await Thread.create({
-                author, boardId: boardExist.id
+                author, boardId: boardExist.id, bump: Date.now()
             })
 
             let opPost = await Post.create({
-                author, text, media: JSON.stringify(namesArray), threadId: newThread.id, authorIp
+                author, text, media: JSON.stringify(namesArray), threadId: newThread.id, authorIp,
             })
 
             return res.json(newThread)
@@ -107,6 +107,26 @@ class threadController {
         }
 
     }
+
+    async GetOneThread(req, res){
+        try{
+            const {threadId} = req.query
+            if(!threadId){
+                return res.status(400).json({message: "threadId not stated"})
+            }
+            const thread = await Thread.findOne({where:{id: threadId}})
+
+            return res.json({thread})
+
+        } catch (e) {
+            return res.status(500).json({
+                message:e.message,
+            })
+        }
+    }
+
+
+
     async Update(req, res, next){
 
         return res.json({message: 'Route works but do nothing'})
@@ -144,6 +164,49 @@ class threadController {
         const deleted = await Thread.destroy({where:{id: threadId}})
 
         return res.json(deleted)
+    }
+
+
+    async PinThread(req, res){
+        const {threadId} = req.body
+        if(!threadId){
+            return res.status(400).json({message: 'threadId not stated'})
+        }
+        // console.log(threadId)
+        let userId = checkUserMiddleware(req).id
+        if(!userId){
+            return res.status(403).json({message: 'Forbidden'})
+        }
+
+        let candidateThread = await Thread.findOne({
+            where: {id: threadId}
+        })
+
+        //already pinned?
+        if(candidateThread.bump>Date.now()*1.1){
+            //unPin
+
+            const lastPost = await Post.findOne({
+                where:{threadId},
+                order: [['id', 'DESC']]
+            })
+
+            let unpinned = await Thread.update(
+                {bump: lastPost.createdAt},
+                {where: {id: threadId}}
+            )
+            return res.json({unpinned})
+
+        } else {
+            //pin
+            let pinned = await Thread.update(
+                {bump: Date.now()*2},
+                {where: {id: threadId}}
+            )
+            return res.json({pinned})
+
+        }
+
     }
 
 

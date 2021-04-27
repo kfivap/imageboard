@@ -9,7 +9,7 @@ const BoardStatistic = observer(() => {
     useEffect(()=>{
         async function fetchData() {
             const data = await boardTotal()
-console.log(data)
+// console.log(data)
             setStat(data)
         }
 fetchData()

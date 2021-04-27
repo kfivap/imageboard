@@ -20,3 +20,17 @@ export const deleteThread = async (thread) =>{
     (`api/thread/delete?threadId=${thread}`)
     return data
 }
+
+export const pinThread = async (threadId) =>{
+
+    const {data} = await $authHost.put
+    (`api/thread/pin`, {threadId})
+    return data
+}
+
+export const getOneThread = async (thread) =>{
+
+    const {data} = await $authHost.get
+    (`api/thread/getOne?threadId=${thread}`)
+    return data
+}

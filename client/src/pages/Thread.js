@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {observer} from "mobx-react-lite";
 
 import ThreadPosts from "../components/ThreadPosts";
@@ -8,12 +8,14 @@ import {useHistory} from "react-router-dom";
 import {Context} from "../index";
 import {toJS} from "mobx";
 import ThreadButtonsAdmin from "../components/Admin/ThreadButtonsAdmin";
+import {getOneThread} from "../http/ThreadAPI";
 
 const Thread = observer(() => {
 
 
     const history = useHistory()
     const {board} =useContext(Context)
+    const [threadInfo, setThreadInfo] =useState()
 
 const threadId = window.location.pathname.split('/')[3]
     // console.log(threadId)
@@ -23,6 +25,8 @@ const threadId = window.location.pathname.split('/')[3]
             try{
                 // let data = await getPosts(window.location.pathname.split('/')[3])
                let data= await board.fetchPostList(window.location.pathname.split('/')[3])
+                let threadData = await getOneThread(threadId)
+                setThreadInfo(threadData)
 
                 if(!toJS(board.postsList).posts){
                     history.push(NOTFOUND_ROUTE)
@@ -49,7 +53,10 @@ const threadId = window.location.pathname.split('/')[3]
         <div>
 
             Thread {window.location.pathname}
-            <ThreadButtonsAdmin threadId={threadId}/>
+            <ThreadButtonsAdmin
+                threadId={threadId}
+                bump={threadInfo?.thread?.bump}
+            />
 
             {toJS(board.postsList.posts)?.rows.map((post, index)=>
                 <ThreadPosts key={index} post={post} index={index}/>
