@@ -9,6 +9,7 @@ router.get('/get', boardController.Read)
 router.get('/getInfo', boardController.GetBoardInfo)
 router.put('/update', boardController.Update)
 router.delete('/delete', boardController.Delete)
+router.get('/total', boardController.Total)
 
 
 

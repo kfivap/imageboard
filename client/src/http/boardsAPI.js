@@ -24,3 +24,8 @@ export const createBoardAPI = async (formData) =>{
     return data
 }
 
+export const boardTotal  = async ()=>{
+
+    const {data} = await $host.get('api/board/total')
+    return data
+}

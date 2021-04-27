@@ -1,4 +1,6 @@
-const {Board, User} = require('../models/models')
+
+
+const {Board, User, Post, Thread} = require('../models/models')
 const checkUserMiddleware = require('../middleware/checkUserMiddleware')
 
 class boardController {
@@ -69,6 +71,29 @@ class boardController {
             })
         }
 
+    }
+
+    async Total(req, res){
+        try{
+            const post = await Post.findOne({
+                order: [['id', "DESC"]]
+            })
+            const thread = await Thread.findOne({
+                order: [['id', "DESC"]]
+            })
+            const board = await Board.findOne({
+                order: [['id', "DESC"]]
+            })
+            return res.json({
+                postCount: post.id,
+                threadCount:thread.id,
+                boardCount: board.id
+            })
+        } catch (e) {
+            return res.status(500).json({
+                message: e.message,
+            })
+        }
     }
 
 }
