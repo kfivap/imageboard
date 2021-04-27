@@ -52,6 +52,10 @@ class postController {
             let newPost = await Post.create({
                 author, text,  media: JSON.stringify(namesArray), threadId, authorIp
             })
+            let bumpThread = await Thread.update(
+                {bump: Date.now()},
+                {where: {id: threadId}}
+           )
 
 
 

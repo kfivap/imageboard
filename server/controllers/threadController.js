@@ -28,9 +28,6 @@ class threadController {
 
             //
 
-            let newThread = await Thread.create({
-                author, boardId: boardExist.id
-            })
 
 
 
@@ -44,6 +41,7 @@ class threadController {
 
                 const {media0, media1, media2, media3} = req.files
 
+
                await media0?.mv(path.resolve(__dirname, '..', 'static', pushNamesArray()))
                 await media1?.mv(path.resolve(__dirname, '..', 'static', pushNamesArray()))
                 await media2?.mv(path.resolve(__dirname, '..', 'static', pushNamesArray()))
@@ -55,6 +53,14 @@ class threadController {
             } catch (e) {
                 console.log(e.message)
             }
+
+            if(namesArray.length===0){
+                return res.status(400).json({message: '0 files error'})
+            }
+
+            let newThread = await Thread.create({
+                author, boardId: boardExist.id
+            })
 
             let opPost = await Post.create({
                 author, text, media: JSON.stringify(namesArray), threadId: newThread.id, authorIp
@@ -87,9 +93,12 @@ class threadController {
                 return res.status(404).json({message: 'board not found'})
             }
 
-            let threads = await Thread.findAndCountAll({where:{
+            let threads = await Thread.findAndCountAll({
+                where:{
                   boardId: boardFind.id
-                }})
+                },
+                order: [['bump', 'DESC']]
+            })
             return res.json({threads})
         } catch (e) {
             return res.status(500).json({

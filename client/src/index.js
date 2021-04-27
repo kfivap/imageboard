@@ -19,7 +19,7 @@ ReactDOM.render(
         board: new BoardStore()
     }}>
 
-    <App />
+    <App/>
 
 
 

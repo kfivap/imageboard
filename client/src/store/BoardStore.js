@@ -11,6 +11,7 @@ export default class UserStore {
         this._createPostText = ''
         this._postsList = []
         this._createPostThreadId = 0
+
         makeAutoObservable(this)
     }
 
@@ -30,6 +31,8 @@ export default class UserStore {
     setCreatePostThreadId(id){
         this._createPostThreadId = id
     }
+
+
 
      async fetchPostList(link){
             try{
@@ -61,5 +64,6 @@ export default class UserStore {
     get createPostThreadId(){
         return this._createPostThreadId
     }
+
 
 }

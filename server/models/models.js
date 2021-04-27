@@ -23,7 +23,8 @@ const Board = sequelize.define('board', {
 
 const Thread = sequelize.define('thread', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    opPost: {type: DataTypes.STRING}
+    opPost: {type: DataTypes.STRING},
+    bump: {type: DataTypes.DATE, defaultValue: Date.now()}
 
 })
 

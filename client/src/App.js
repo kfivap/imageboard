@@ -9,6 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import ImageExpanded from "./components/ImageExpanded";
 import ModalCreatePost from "./components/ModalCreatePost";
+import {toJS} from "mobx";
 
 
 const App = observer(() => {
@@ -35,7 +36,8 @@ const App = observer(() => {
     }
 
     return (
-        <BrowserRouter>
+
+        <BrowserRouter >
             <NavBar/>
             <Container style={{maxWidth: 760}}>
                 <AppRouter/></Container>
@@ -43,6 +45,7 @@ const App = observer(() => {
             <ModalCreatePost/>
 
         </BrowserRouter>
+
     );
 })
 
